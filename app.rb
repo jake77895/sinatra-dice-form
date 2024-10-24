@@ -2,8 +2,22 @@ require "sinatra"
 require "sinatra/reloader"
 
 get("/") do
-  "
-  <h1>Welcome to your Sinatra App!</h1>
-  <p>Define some routes in app.rb</p>
-  "
+  
+
+
+  erb(:home)
+
+end
+
+get("/process_roll") do
+
+  @dice = params[:dice].to_i
+  @sides = params[:sides].to_i
+
+  # Ensure that both inputs are valid
+  if @dice < 1 || @sides < 1
+    redirect '/'  # Redirect to home if inputs are invalid
+  end
+
+  erb(:results)
 end
